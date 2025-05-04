@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [postText, setPostText] = useState("");
   const [jobPostText, setJobPostText] = useState("");
-  const [isDarkTheme, setIsDarkTheme] = useState(false); // State for theme
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const handlePostChange = (e) => {
     setPostText(e.target.value);
@@ -29,28 +30,40 @@ const Home = () => {
 
   return (
     <div className={isDarkTheme ? "bg-gray-900 text-white min-h-screen" : "bg-[#f3f2ef] text-black min-h-screen"}>
+      
       {/* Top Navbar */}
       <header className={`bg-white shadow-sm fixed w-full top-0 z-10 ${isDarkTheme ? "bg-gray-800 text-white" : ""}`}>
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <h1 className="text-xl font-bold text-blue-600">LinkedIn</h1>
+
           <input
             type="text"
             placeholder="Search"
             className={`px-4 py-2 rounded-md border w-1/3 ${isDarkTheme ? "bg-gray-700 border-gray-600 text-white" : "border-gray-300"}`}
           />
-          <div className="flex gap-4">
+
+          <div className="flex gap-4 items-center">
             <span className="text-sm">Home</span>
             <span className="text-sm">My Network</span>
             <span className="text-sm">Jobs</span>
             <span className="text-sm">Messaging</span>
             <span className="text-sm">Notifications</span>
+
+            {/* ML Features Button */}
+            <Link
+              to="/ml-features"
+              className={`text-"sm px-3 py-1 rounded-md ${isDarkTheme ? "bg-gray-700 text-white" : "bg-blue-500 text-white hover:bg-blue-600"}`}
+            >
+              ML Features
+            </Link>
+
+            <button
+              onClick={toggleTheme}
+              className={`px-4 py-2 rounded-md ${isDarkTheme ? "bg-gray-700 text-white" : "bg-blue-600 text-white"}`}
+            >
+              {isDarkTheme ? "Light Mode" : "Dark Mode"}
+            </button>
           </div>
-          <button
-            onClick={toggleTheme}
-            className={`px-4 py-2 rounded-md ${isDarkTheme ? "bg-gray-700 text-white" : "bg-blue-600 text-white"}`}
-          >
-            {isDarkTheme ? "Light Mode" : "Dark Mode"}
-          </button>
         </div>
       </header>
 
@@ -58,11 +71,6 @@ const Home = () => {
         {/* Left Sidebar */}
         <aside className={`w-1/4 p-4 rounded-md shadow-sm h-fit ${isDarkTheme ? "bg-gray-800 text-white" : "bg-white"}`}>
           <div className="text-center">
-            <img
-              src="https://placehold.co/100x100"
-              alt="Profile"
-              className="rounded-full mx-auto mb-2"
-            />
             <h2 className="font-semibold text-lg">Soham Suryawanshi</h2>
             <p className="text-sm">Full Stack Developer</p>
           </div>
@@ -110,11 +118,20 @@ const Home = () => {
             </button>
           </div>
 
-          {/* Posts */}
+          {/* Sample Posts */}
           {[1, 2, 3].map((post) => (
             <div key={post} className={`p-4 mb-4 rounded-md shadow-sm ${isDarkTheme ? "bg-gray-800 text-white" : "bg-white"}`}>
-              <h3 className="font-semibold">Jane Smith</h3>
-              <p className="text-sm">Product Manager at ABC Inc.</p>
+              <div className="flex items-center gap-2">
+                <img
+                  src="https://placehold.co/50x50"
+                  alt="Profile"
+                  className="rounded-full"
+                />
+                <div>
+                  <h3 className="font-semibold">Jane Smith</h3>
+                  <p className="text-sm">Product Manager at ABC Inc.</p>
+                </div>
+              </div>
               <p className="mt-2">
                 Vibe Coding Hackathon is best.
               </p>
